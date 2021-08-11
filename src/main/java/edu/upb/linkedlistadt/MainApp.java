@@ -6,23 +6,27 @@
 package edu.upb.linkedlistadt;
 
 import edu.upb.classes.SimpleLinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author cahuc
  */
 public class MainApp {
-    
+
     public static void main(String[] args) {
 
-       SimpleLinkedList list = new SimpleLinkedList();
-       list.add(1);
-       list.add(3);
-       list.add(10);
-       list.add(5);
-       
-       list.print();
-       
+        SimpleLinkedList list = new SimpleLinkedList();
+        list.add(1);
+        //list.add(3);
+        //list.add(10);
+        //list.add(5);
+
+        list.remove(-1);
+
+        list.print();
+
     }
-    
+
 }

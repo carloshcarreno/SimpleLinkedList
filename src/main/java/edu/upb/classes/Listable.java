@@ -15,5 +15,6 @@ public interface Listable {
     public void add(int value);
     public Object find(int index);
     public void clear();
+    public void remove(int index);
     
 }
