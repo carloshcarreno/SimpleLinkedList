@@ -13,7 +13,9 @@ package edu.upb.classes;
 public interface Listable {
     
     public void add(int value);
-    public Object find(int index);
+    public int find(int index) throws Exception;
+    public int findByValue(int value) throws Exception;
+    public void update(int index, int value) throws Exception;
     public void clear();
     public void remove(int index);
     

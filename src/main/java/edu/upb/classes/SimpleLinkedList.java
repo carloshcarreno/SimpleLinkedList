@@ -12,6 +12,7 @@ package edu.upb.classes;
 public class SimpleLinkedList implements Listable {
 
     private Node first;
+    private Node last;
     private int size = 0;
 
     public Node getFirst() {
@@ -53,15 +54,10 @@ public class SimpleLinkedList implements Listable {
 
         if (this.first == null) {
             this.first = node;
+            this.last = node;
         } else {
-
-            Node last = getFirst();
-
-            while (last.getNext() != null) {
-                last = last.getNext();
-            }
-
-            last.setNext(node);
+            this.last.setNext(node);
+            this.last = node;
 
         }
 
@@ -70,8 +66,75 @@ public class SimpleLinkedList implements Listable {
     }
 
     @Override
-    public Object find(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int find(int index) throws Exception {
+
+        Node current = getFirst();
+        int result = 0;
+        int counter = 0;
+
+        if (index >= getSize() || index < 0) {
+            throw new Exception("Index doesn't exist!");
+        } else if (current == null) {
+            throw new Exception("Empty list!");
+        } else if (index == 0) {
+            result = this.first.getValue();
+        } else {
+
+            do {
+                current = current.getNext();
+                counter++;
+            } while (counter < index);
+
+            result = current.getValue();
+
+        }
+
+        return result;
+
+    }
+
+    @Override
+    public int findByValue(int value) throws Exception {
+
+        Node current = getFirst();
+        int index = 0;
+
+        while (current.getValue() != value) {
+            index++;
+            current = current.getNext();
+
+            if (index == getSize()) {
+                throw new Exception("Not found");
+            }
+        }
+
+        return index;
+    }
+
+    @Override
+    public void update(int index, int value) throws Exception{
+
+        Node current = getFirst();
+        int counter = 0;
+
+        if (index >= getSize() || index < 0) {
+            throw new Exception("Index doesn't exist!");
+        } else if (current == null) {
+            throw new Exception("Empty list!");
+        } else if (index == 0) {
+            this.first.setValue(value);
+        } else {
+
+            do {
+                current = current.getNext();
+                counter++;
+            } while (counter < index);
+
+            current.setValue(value);
+
+        }
+
+
     }
 
     @Override
@@ -87,9 +150,9 @@ public class SimpleLinkedList implements Listable {
         Node current = getFirst();
         int counter = 0;
 
-        if(index >= getSize() || index<0 ){
+        if (index >= getSize() || index < 0) {
             System.out.println("Index doesn't exist!");
-        }else if (index == 0 && current != null) {
+        } else if (index == 0 && current != null) {
             this.first = current.getNext();
             current = null;
             this.size--;
@@ -98,10 +161,9 @@ public class SimpleLinkedList implements Listable {
             do {
                 current = current.getNext();
                 counter++;
-            } while (counter < index-1);
+            } while (counter < index - 1);
 
-            current.setNext( current.getNext().getNext());
-
+            current.setNext(current.getNext().getNext());
         }
 
     }
